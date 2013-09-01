@@ -39,16 +39,29 @@
 #define __XTAL            (12000000UL)    /* Oscillator frequency             */
 #define __SYS_OSC_CLK     (50000000UL)    /* Main oscillator frequency        */
 
-#define __SYSTEM_CLOCK    (120000000UL)
+/* 120MHz core clock and platform settings */
+#define __SYSTEM_CLOCK          (120000000UL)
+
+#define PLL_REF_CLOCK_DIV       5   // PRDIV
+#define PLL_CLOCK_MUL           24  // VDIV
+
+#define CORE_DIV                1   // 120MHz
+#define BUS_DIV                 2   // 60MHz
+#define FLEXBUS_DIV             3   // 40MHz
+#define FLASH_DIV               6   // 20MHz
 
 
+/* RANGE0 frequency mode set */
+#if 40000 >= __SYS_OSC_CLK
+#define RANGE0_VAL      0
+#elif 8000000 >= __SYS_OSC_CLK
 #define RANGE0_VAL      1
-#define FEXT            __SYS_OSC_CLK
+#else
+//#define RANGE0_VAL      1       // for silicon rev. 1.0 (__SYS_OSC_CLK >= 8000000)
+#define RANGE0_VAL      2
+#endif
 
-#define PRDIV_VAL       5
-#define VDIV_VAL        24
-
-
+/* FRDIV value set */
 #if 1250000 >= __SYS_OSC_CLK
 #define FRDIV_VAL       0
 #elif 2500000 >= __SYS_OSC_CLK
@@ -63,29 +76,13 @@
 #define FRDIV_VAL       5
 #endif
 
-#if (0 == RANGE0_VAL && (31250 > FEXT / (1 << FRDIV_VAL))) || (RANGE0_VAL && (31250 > FEXT / (1 << FRDIV_VAL + 5)))
-#error
-#elif (0 == RANGE0_VAL && (39062 < FEXT / (1 << FRDIV_VAL))) || (RANGE0_VAL && (39062 < FEXT / (1 << FRDIV_VAL + 5)))
-//#error
-#endif
-
-
-#define REF_CLK         (__SYS_OSC_CLK / PRDIV_VAL)
-
-#if 8000000 > REF_CLK
-#error
-#elif 16000000 < REF_CLK
+#if 1 > PLL_REF_CLOCK_DIV || 8 < PLL_REF_CLOCK_DIV
 #error
 #endif
 
-#if 1 > PRDIV_VAL || 8 < PRDIV_VAL
+#if 16 > PLL_CLOCK_MUL || 47 < PLL_CLOCK_MUL
 #error
 #endif
-
-#if 16 > VDIV_VAL || 47 < VDIV_VAL
-#error
-#endif
-
 
 /** Disable watchdog.
  */
@@ -129,14 +126,21 @@ static void trace_clk_init(void) {
   Clock Variable definitions
  *----------------------------------------------------------------------------*/
 uint32_t SystemCoreClock = __SYSTEM_CLOCK;  /*!< System Clock Frequency (Core Clock)*/
-
+uint32_t BusClock = __SYSTEM_CLOCK / BUS_DIV;
 
 /*----------------------------------------------------------------------------
   Clock functions
  *----------------------------------------------------------------------------*/
-void SystemCoreClockUpdate (void)            /* Get Core Clock Frequency      */
+void SystemCoreClockUpdate(void)            /* Get Core Clock Frequency      */
 {
-    SystemCoreClock = __SYSTEM_CLOCK;
+    uint32_t mcgclk, prdiv, vdiv;
+    
+    prdiv = ((MCG_C5 & MCG_C5_PRDIV_MASK) >> MCG_C5_PRDIV_SHIFT) + 1;
+    vdiv = ((MCG_C6 & MCG_C6_VDIV_MASK) >> MCG_C6_VDIV_SHIFT) + 16;
+
+    mcgclk = ((__SYS_OSC_CLK / prdiv) * vdiv) / 2;
+    SystemCoreClock = mcgclk / CORE_DIV;
+    BusClock = mcgclk / BUS_DIV;
 }
 
 /**
@@ -149,22 +153,17 @@ void SystemCoreClockUpdate (void)            /* Get Core Clock Frequency      */
  *         Initialize the System.
  */
 void SystemInit(void) {
-	wdt_disable();
-	clock_enable();
-	trace_clk_init();
-
+    wdt_disable();
+    clock_enable();
+    trace_clk_init();
+    
     // system dividers
-    SIM_CLKDIV1 = SIM_CLKDIV1_OUTDIV1(0) | SIM_CLKDIV1_OUTDIV2(1) | SIM_CLKDIV1_OUTDIV3(2) | SIM_CLKDIV1_OUTDIV4(5);
+    SIM_CLKDIV1 = SIM_CLKDIV1_OUTDIV1(CORE_DIV - 1) | SIM_CLKDIV1_OUTDIV2(BUS_DIV - 1) | SIM_CLKDIV1_OUTDIV3(FLEXBUS_DIV - 1) | SIM_CLKDIV1_OUTDIV4(FLASH_DIV - 1);
     
     // after reset, we are in FEI mode
     
     // enable external clock source - OSC0
-#if __SYS_OSC_CLK <= 8000000
-    MCG_C2 = MCG_C2_LOCRE0_MASK | MCG_C2_RANGE(RANGE0_VAL) | (0 << MCG_C2_HGO_SHIFT) | (0 << MCG_C2_EREFS_SHIFT);
-#else
-//    MCG_C2 = MCG_C2_LOCRE_MASK | MCG_C2_RANGE(1) | (0 << MCG_C2_HGO_SHIFT) | (0 << MCG_C2_EREFS_SHIFT);       // for silicon rev. 1.0
-    MCG_C2 = MCG_C2_LOCRE_MASK | MCG_C2_RANGE(2) | (0 << MCG_C2_HGO_SHIFT) | (0 << MCG_C2_EREFS_SHIFT);
-#endif
+    MCG_C2 = MCG_C2_LOCRE_MASK | MCG_C2_RANGE(RANGE0_VAL) | (0 << MCG_C2_HGO_SHIFT) | (0 << MCG_C2_EREFS_SHIFT);
     
     // select clock mode, we want FBE mode
     // CLKS = 2, FRDIV = FRDIV_VAL, IREFS = 0, IRCLKEN = 0, IREFSTEN = 0
@@ -183,9 +182,9 @@ void SystemInit(void) {
     MCG_C6 = MCG_C6_CME_MASK;
 
     // PLL0
-    MCG_C5 = MCG_C5_PRDIV(PRDIV_VAL - 1);       // set PLL0 ref divider, osc0 is reference
+    MCG_C5 = MCG_C5_PRDIV(PLL_REF_CLOCK_DIV - 1);       // set PLL0 ref divider, osc0 is reference
 
-    MCG_C6 = MCG_C6_PLLS_MASK | MCG_C6_VDIV(VDIV_VAL - 16);     // set VDIV and enable PLL
+    MCG_C6 = MCG_C6_PLLS_MASK | MCG_C6_VDIV(PLL_CLOCK_MUL - 16);     // set VDIV and enable PLL
         
     // wait to lock...
     while (!(MCG_S & MCG_S_PLLST_MASK));
@@ -197,5 +196,6 @@ void SystemInit(void) {
     while (MCG_S_CLKST(3) != (MCG_S & MCG_S_CLKST_MASK));
 
     // ... PEE mode
-    SystemCoreClock = __SYSTEM_CLOCK;
+    
+    SystemCoreClockUpdate();
 }

@@ -31,7 +31,8 @@ extern "C" {
 
 #include <stdint.h>
 
-extern uint32_t SystemCoreClock;     /*!< System Clock Frequency (Core Clock)  */
+extern uint32_t SystemCoreClock;    /*!< system clock frequency (core clock) */
+extern uint32_t BusClock;           /*!< bus clock frequency (bus, peripheral clock) */
 
 
 /**
