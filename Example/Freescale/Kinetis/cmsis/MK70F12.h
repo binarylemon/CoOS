@@ -17823,7 +17823,7 @@ typedef struct UART_MemMap {
   uint8_t CPW;                                     /**< UART CEA709.1-B Collision Pulse Width, offset: 0x2F */
   uint8_t RIDT;                                    /**< UART CEA709.1-B Receive Indeterminate Time, offset: 0x30 */
   uint8_t TIDT;                                    /**< UART CEA709.1-B Transmit Indeterminate Time, offset: 0x31 */
-} volatile *UART_MemMapPtr;
+} volatile *UART_MemMapPtr, UART_TypeDef;
 
 /* ----------------------------------------------------------------------------
    -- UART - Register accessor macros
