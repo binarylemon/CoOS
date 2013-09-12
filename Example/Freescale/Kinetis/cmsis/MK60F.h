@@ -1,7 +1,7 @@
 /**************************************************************************//**
- * @file     MK70F.h
+ * @file     MK60F.h
  * @brief    CMSIS Cortex-M4 Core Peripheral Access Layer Header File for
- *           Device MK70F
+ *           Device MK60F
  * @version  V3.01
  * @date     06. March 2012
  *
@@ -23,8 +23,8 @@
  ******************************************************************************/
 
 
-#ifndef MK70F_H
-#define MK70F_H
+#ifndef MK60F_H
+#define MK60F_H
 
 #ifdef __cplusplus
  extern "C" {
@@ -91,91 +91,91 @@ typedef enum IRQn
   FTFE_IRQn                     = 18,               /**< FTFE interrupt */
   Read_Collision_IRQn           = 19,               /**< Read collision interrupt */
   LVD_LVW_IRQn                  = 20,               /**< Low Voltage Detect, Low Voltage Warning */
-  LLW_IRQn                      = 22,               /**< Low Leakage Wakeup */
-  Watchdog_IRQn                 = 23,               /**< WDOG interrupt */
-  RNG_IRQn                      = 24,               /**< RNGA interrupt */
-  I2C0_IRQn                     = 25,               /**< I2C0 interrupt */
-  I2C1_IRQn                     = 26,               /**< I2C1 interrupt */
-  SPI0_IRQn                     = 27,               /**< SPI0 interrupt */
-  SPI1_IRQn                     = 28,               /**< SPI1 interrupt */
-  SPI2_IRQn                     = 29,               /**< SPI2 interrupt */
-  CAN0_ORed_Message_buffer_IRQn = 30,               /**< CAN0 OR'd message buffers interrupt */
-  CAN0_Bus_Off_IRQn             = 31,               /**< CAN0 bus off interrupt */
-  CAN0_Error_IRQn               = 32,               /**< CAN0 error interrupt */
-  CAN0_Tx_Warning_IRQn          = 33,               /**< CAN0 Tx warning interrupt */
-  CAN0_Rx_Warning_IRQn          = 34,               /**< CAN0 Rx warning interrupt */
-  CAN0_Wake_Up_IRQn             = 35,               /**< CAN0 wake up interrupt */
-  I2S0_Tx_IRQn                  = 36,               /**< I2S0 transmit interrupt */
-  I2S0_Rx_IRQn                  = 37,               /**< I2S0 receive interrupt */
-  CAN1_ORed_Message_buffer_IRQn = 38,               /**< CAN1 OR'd message buffers interrupt */
-  CAN1_Bus_Off_IRQn             = 39,               /**< CAN1 bus off interrupt */
-  CAN1_Error_IRQn               = 40,               /**< CAN1 error interrupt */
-  CAN1_Tx_Warning_IRQn          = 41,               /**< CAN1 Tx warning interrupt */
-  CAN1_Rx_Warning_IRQn          = 42,               /**< CAN1 Rx warning interrupt */
-  CAN1_Wake_Up_IRQn             = 43,               /**< CAN1 wake up interrupt */
-  Reserved59_IRQn               = 44,               /**< Reserved interrupt 59 */
-  UART0_LON_IRQn                = 45,               /**< UART0 LON interrupt */
-  UART0_RX_TX_IRQn              = 46,               /**< UART0 receive/transmit interrupt */
-  UART0_ERR_IRQn                = 47,               /**< UART0 error interrupt */
-  UART1_RX_TX_IRQn              = 48,               /**< UART1 receive/transmit interrupt */
-  UART1_ERR_IRQn                = 49,               /**< UART1 error interrupt */
-  UART2_RX_TX_IRQn              = 50,               /**< UART2 receive/transmit interrupt */
-  UART2_ERR_IRQn                = 51,               /**< UART2 error interrupt */
-  UART3_RX_TX_IRQn              = 52,               /**< UART3 receive/transmit interrupt */
-  UART3_ERR_IRQn                = 53,               /**< UART3 error interrupt */
-  UART4_RX_TX_IRQn              = 54,               /**< UART4 receive/transmit interrupt */
-  UART4_ERR_IRQn                = 55,               /**< UART4 error interrupt */
-  UART5_RX_TX_IRQn              = 56,               /**< UART5 receive/transmit interrupt */
-  UART5_ERR_IRQn                = 57,               /**< UART5 error interrupt */
-  ADC0_IRQn                     = 58,               /**< ADC0 interrupt */
-  ADC1_IRQn                     = 59,               /**< ADC1 interrupt */
-  CMP0_IRQn                     = 60,               /**< CMP0 interrupt */
-  CMP1_IRQn                     = 61,               /**< CMP1 interrupt */
-  CMP2_IRQn                     = 62,               /**< CMP2 interrupt */
-  FTM0_IRQn                     = 63,               /**< FTM0 fault, overflow and channels interrupt */
-  FTM1_IRQn                     = 64,               /**< FTM1 fault, overflow and channels interrupt */
-  FTM2_IRQn                     = 65,               /**< FTM2 fault, overflow and channels interrupt */
-  CMT_IRQn                      = 66,               /**< CMT interrupt */
-  RTC_IRQn                      = 67,               /**< RTC interrupt */
-  RTC_Seconds_IRQn              = 68,               /**< RTC seconds interrupt */
-  PIT0_IRQn                     = 69,               /**< PIT timer channel 0 interrupt */
-  PIT1_IRQn                     = 70,               /**< PIT timer channel 1 interrupt */
-  PIT2_IRQn                     = 71,               /**< PIT timer channel 2 interrupt */
-  PIT3_IRQn                     = 72,               /**< PIT timer channel 3 interrupt */
-  PDB0_IRQn                     = 73,               /**< PDB0 interrupt */
-  USB0_IRQn                     = 74,               /**< USB0 interrupt */
-  USBDCD_IRQn                   = 75,               /**< USBDCD interrupt */
-  ENET_1588_Timer_IRQn          = 76,               /**< Ethernet MAC IEEE 1588 timer interrupt */
-  ENET_Transmit_IRQn            = 77,               /**< Ethernet MAC transmit interrupt */
-  ENET_Receive_IRQn             = 78,               /**< Ethernet MAC receive interrupt */
-  ENET_Error_IRQn               = 79,               /**< Ethernet MAC error and miscelaneous interrupt */
-  Reserved95_IRQn               = 80,               /**< Reserved interrupt 95 */
-  SDHC_IRQn                     = 81,               /**< SDHC interrupt */
-  DAC0_IRQn                     = 82,               /**< DAC0 interrupt */
-  DAC1_IRQn                     = 83,               /**< DAC1 interrupt */
-  TSI0_IRQn                     = 84,               /**< TSI0 interrupt */
-  MCG_IRQn                      = 85,              /**< MCG interrupt */
-  LPTimer_IRQn                  = 86,              /**< LPTimer interrupt */
-  Reserved102_IRQn              = 87,              /**< Reserved interrupt 102 */
-  PORTA_IRQn                    = 88,              /**< Port A interrupt */
-  PORTB_IRQn                    = 89,              /**< Port B interrupt */
-  PORTC_IRQn                    = 90,              /**< Port C interrupt */
-  PORTD_IRQn                    = 91,              /**< Port D interrupt */
-  PORTE_IRQn                    = 92,              /**< Port E interrupt */
-  PORTF_IRQn                    = 93,              /**< Port F interrupt */
-  DDR_IRQn                      = 94,              /**< DDR interrupt */
-  SWI_IRQn                      = 95,              /**< Software interrupt */
-  NFC_IRQn                      = 96,              /**< NAND flash controller interrupt */
-  USBHS_IRQn                    = 97,              /**< USB high speed OTG interrupt */
-  Reserved113_IRQn              = 98,              /**< Reserved interrupt 113 */
-  CMP3_IRQn                     = 99,              /**< CMP3 interrupt */
-  Tamper_IRQn                   = 100,              /**< Tamper detect interrupt */
-  Reserved116_IRQn              = 101,              /**< Reserved interrupt 116 */
-  FTM3_IRQn                     = 102,              /**< FTM3 fault, overflow and channels interrupt */
-  ADC2_IRQn                     = 103,              /**< ADC2 interrupt */
-  ADC3_IRQn                     = 104,              /**< ADC3 interrupt */
-  I2S1_Tx_IRQn                  = 105,              /**< I2S1 transmit interrupt */
-  I2S1_Rx_IRQn                  = 106               /**< I2S1 receive interrupt */
+  LLW_IRQn                      = 21,               /**< Low Leakage Wakeup */
+  Watchdog_IRQn                 = 22,               /**< WDOG interrupt */
+  RNG_IRQn                      = 23,               /**< RNGA interrupt */
+  I2C0_IRQn                     = 24,               /**< I2C0 interrupt */
+  I2C1_IRQn                     = 25,               /**< I2C1 interrupt */
+  SPI0_IRQn                     = 26,               /**< SPI0 interrupt */
+  SPI1_IRQn                     = 27,               /**< SPI1 interrupt */
+  SPI2_IRQn                     = 28,               /**< SPI2 interrupt */
+  CAN0_ORed_Message_buffer_IRQn = 29,               /**< CAN0 OR'd message buffers interrupt */
+  CAN0_Bus_Off_IRQn             = 30,               /**< CAN0 bus off interrupt */
+  CAN0_Error_IRQn               = 31,               /**< CAN0 error interrupt */
+  CAN0_Tx_Warning_IRQn          = 32,               /**< CAN0 Tx warning interrupt */
+  CAN0_Rx_Warning_IRQn          = 33,               /**< CAN0 Rx warning interrupt */
+  CAN0_Wake_Up_IRQn             = 34,               /**< CAN0 wake up interrupt */
+  I2S0_Tx_IRQn                  = 35,               /**< I2S0 transmit interrupt */
+  I2S0_Rx_IRQn                  = 36,               /**< I2S0 receive interrupt */
+  CAN1_ORed_Message_buffer_IRQn = 37,               /**< CAN1 OR'd message buffers interrupt */
+  CAN1_Bus_Off_IRQn             = 38,               /**< CAN1 bus off interrupt */
+  CAN1_Error_IRQn               = 39,               /**< CAN1 error interrupt */
+  CAN1_Tx_Warning_IRQn          = 40,               /**< CAN1 Tx warning interrupt */
+  CAN1_Rx_Warning_IRQn          = 41,               /**< CAN1 Rx warning interrupt */
+  CAN1_Wake_Up_IRQn             = 42,               /**< CAN1 wake up interrupt */
+  Reserved59_IRQn               = 43,               /**< Reserved interrupt 59 */
+  UART0_LON_IRQn                = 44,               /**< UART0 LON interrupt */
+  UART0_RX_TX_IRQn              = 45,               /**< UART0 receive/transmit interrupt */
+  UART0_ERR_IRQn                = 46,               /**< UART0 error interrupt */
+  UART1_RX_TX_IRQn              = 47,               /**< UART1 receive/transmit interrupt */
+  UART1_ERR_IRQn                = 48,               /**< UART1 error interrupt */
+  UART2_RX_TX_IRQn              = 49,               /**< UART2 receive/transmit interrupt */
+  UART2_ERR_IRQn                = 50,               /**< UART2 error interrupt */
+  UART3_RX_TX_IRQn              = 51,               /**< UART3 receive/transmit interrupt */
+  UART3_ERR_IRQn                = 52,               /**< UART3 error interrupt */
+  UART4_RX_TX_IRQn              = 53,               /**< UART4 receive/transmit interrupt */
+  UART4_ERR_IRQn                = 54,               /**< UART4 error interrupt */
+  UART5_RX_TX_IRQn              = 55,               /**< UART5 receive/transmit interrupt */
+  UART5_ERR_IRQn                = 56,               /**< UART5 error interrupt */
+  ADC0_IRQn                     = 57,               /**< ADC0 interrupt */
+  ADC1_IRQn                     = 58,               /**< ADC1 interrupt */
+  CMP0_IRQn                     = 59,               /**< CMP0 interrupt */
+  CMP1_IRQn                     = 60,               /**< CMP1 interrupt */
+  CMP2_IRQn                     = 61,               /**< CMP2 interrupt */
+  FTM0_IRQn                     = 62,               /**< FTM0 fault, overflow and channels interrupt */
+  FTM1_IRQn                     = 63,               /**< FTM1 fault, overflow and channels interrupt */
+  FTM2_IRQn                     = 64,               /**< FTM2 fault, overflow and channels interrupt */
+  CMT_IRQn                      = 65,               /**< CMT interrupt */
+  RTC_IRQn                      = 66,               /**< RTC interrupt */
+  RTC_Seconds_IRQn              = 67,               /**< RTC seconds interrupt */
+  PIT0_IRQn                     = 68,               /**< PIT timer channel 0 interrupt */
+  PIT1_IRQn                     = 69,               /**< PIT timer channel 1 interrupt */
+  PIT2_IRQn                     = 70,               /**< PIT timer channel 2 interrupt */
+  PIT3_IRQn                     = 71,               /**< PIT timer channel 3 interrupt */
+  PDB0_IRQn                     = 72,               /**< PDB0 interrupt */
+  USB0_IRQn                     = 73,               /**< USB0 interrupt */
+  USBDCD_IRQn                   = 74,               /**< USBDCD interrupt */
+  ENET_1588_Timer_IRQn          = 75,               /**< Ethernet MAC IEEE 1588 timer interrupt */
+  ENET_Transmit_IRQn            = 76,               /**< Ethernet MAC transmit interrupt */
+  ENET_Receive_IRQn             = 77,               /**< Ethernet MAC receive interrupt */
+  ENET_Error_IRQn               = 78,               /**< Ethernet MAC error and miscelaneous interrupt */
+  Reserved95_IRQn               = 79,               /**< Reserved interrupt 95 */
+  SDHC_IRQn                     = 80,               /**< SDHC interrupt */
+  DAC0_IRQn                     = 81,               /**< DAC0 interrupt */
+  DAC1_IRQn                     = 82,               /**< DAC1 interrupt */
+  TSI0_IRQn                     = 83,               /**< TSI0 interrupt */
+  MCG_IRQn                      = 84,               /**< MCG interrupt */
+  LPTimer_IRQn                  = 85,               /**< LPTimer interrupt */
+  Reserved102_IRQn              = 86,               /**< Reserved interrupt 102 */
+  PORTA_IRQn                    = 87,               /**< Port A interrupt */
+  PORTB_IRQn                    = 88,               /**< Port B interrupt */
+  PORTC_IRQn                    = 89,               /**< Port C interrupt */
+  PORTD_IRQn                    = 90,               /**< Port D interrupt */
+  PORTE_IRQn                    = 91,               /**< Port E interrupt */
+  PORTF_IRQn                    = 92,               /**< Port F interrupt */
+  Reserved109_IRQn              = 93,               /**< Reserved interrupt 109 */
+  SWI_IRQn                      = 94,               /**< Software interrupt */
+  NFC_IRQn                      = 95,               /**< NAND flash controller interrupt */
+  USBHS_IRQn                    = 96,               /**< USB high speed OTG interrupt */
+  Reserved113_IRQn              = 97,               /**< Reserved interrupt 113 */
+  CMP3_IRQn                     = 98,               /**< CMP3 interrupt */
+  Reserved115_IRQn              = 99,               /**< Reserved interrupt 115 */
+  Reserved116_IRQn              = 100,              /**< Reserved interrupt 116 */
+  FTM3_IRQn                     = 101,              /**< FTM3 fault, overflow and channels interrupt */
+  ADC2_IRQn                     = 102,              /**< ADC2 interrupt */
+  ADC3_IRQn                     = 103,              /**< ADC3 interrupt */
+  I2S1_Tx_IRQn                  = 104,              /**< I2S1 transmit interrupt */
+  I2S1_Rx_IRQn                  = 105               /**< I2S1 receive interrupt */
 } IRQn_Type;
 
 
@@ -196,7 +196,7 @@ typedef enum IRQn
 
 
 #include <core_cm4.h>                       /* Cortex-M4 processor and core peripherals           */
-#include "system_MK70F.h"                /* MK70F System  include file                      */
+#include "system_MK60F.h"                /* MK70F System  include file                      */
 
 
 /******************************************************************************/
@@ -284,10 +284,10 @@ typedef struct
 
 #endif
 
-#include <MK70F12.h>
+#include <MK60F15.h>
 
 #ifdef __cplusplus
 }
 #endif
 
-#endif  /* MK70F_H */
+#endif  /* MK60F_H */
