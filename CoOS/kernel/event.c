@@ -3,7 +3,11 @@
  * @file       event.c
  * @version   V1.1.4    
  * @date      2011.04.20
- * @brief      event management implementation code of CooCox CoOS kernel.	
+ * @brief      event management implementation code of CooCox CoOS kernel.
+ *
+ * @author CooCox
+ * @author Jozef Maslik (maslo@binarylemon.com)
+ *
  *******************************************************************************
  * @copy
  *
@@ -334,13 +338,15 @@ void EventTaskToRdy(P_ECB pecb)
 #if CFG_QUEUE_EN >0
     else if(pecb->eventType == EVENT_TYPE_QUEUE)  /* Is it a queue event?     */
     {										   
-        pqcb        = (P_QCB)pecb->eventPtr;      /* Yes,get queue pointer    */
-        ptcb->pmail = *(pqcb->qStart + pqcb->head);   /* Send mail to task    */
-        pqcb->head++;                             /* Clear event sign         */
-        pqcb->qSize--;
-        if(pqcb->head == pqcb->qMaxSize)
-        {
-            pqcb->head = 0;	
+        pqcb = (P_QCB)pecb->eventPtr;      /* Yes,get queue pointer    */
+        if (Co_NULL != pqcb) {
+            ptcb->pmail = *(pqcb->qStart + pqcb->head);   /* Send mail to task    */
+            pqcb->head++;                             /* Clear event sign         */
+            pqcb->qSize--;
+            if(pqcb->head == pqcb->qMaxSize)
+            {
+                pqcb->head = 0;	
+            }
         }
     }
 #endif

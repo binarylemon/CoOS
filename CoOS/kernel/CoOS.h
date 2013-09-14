@@ -4,7 +4,11 @@
  * @version   V1.1.4    
  * @date      2011.04.20
  * @brief      API header file of CooCox CoOS.
- * @details    This file including all API functions's declare of CooCox CoOS.	
+ * @details    This file including all API functions's declare of CooCox CoOS.
+ *
+ * @author CooCox
+ * @author Jozef Maslik (maslo@binarylemon.com)
+ *
  *******************************************************************************
  * @copy
  *
@@ -195,6 +199,8 @@ extern void*       CoAcceptQueueMail(OS_EventID id,StatusType* perr);
 extern OS_EventID  CoCreateQueue(void **qStart, U16 size ,U8 sortType);
 extern void*       CoPendQueueMail(OS_EventID id,U32 timeout,StatusType* perr);
 
+extern OS_EventID  CoCreateQueueEx(void **qStart, U16 size, U8 sortType);
+extern StatusType  CoPostQueueMailEx(OS_EventID id, void* pmail, U32 timeout);
 
 
 /* Implement in file "flag.c"      */

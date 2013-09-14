@@ -5,6 +5,10 @@
  * @date      2011.04.20
  * @brief      Queue management header file	
  * @details    This file including some defines and declares about queue management.
+ *
+ * @author CooCox
+ * @author Jozef Maslik (maslo@binarylemon.com)
+ *
  *******************************************************************************
  * @copy
  *
@@ -33,6 +37,7 @@ typedef struct Queue
     U16     tail;                       /*!< The end of queue                 */
     U16     qMaxSize;                   /*!< The max size of queue            */
     U16     qSize;                      /*!< Current size of queue            */
+    P_ECB   fb_ecb;                     /*!< feedback event for extended queue fns */
 }QCB,*P_QCB;
 
 
