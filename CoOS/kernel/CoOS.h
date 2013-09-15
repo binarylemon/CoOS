@@ -139,6 +139,8 @@ extern StatusType  CoSuspendTask(OS_TID taskID);
 extern StatusType  CoSetPriority(OS_TID taskID,U8 priority);
 extern OS_TID      CreateTask(FUNCPtr task,void *argv,U32 parameter,OS_STK *stk);
 
+void CoYield(void);
+
 /* Implement in file "time.c"      */
 extern U64         CoGetOSTime(void);
 extern StatusType  CoTickDelay(U32 ticks);

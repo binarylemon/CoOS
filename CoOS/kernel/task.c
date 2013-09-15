@@ -3,7 +3,11 @@
  * @file       task.c
  * @version   V1.1.4    
  * @date      2011.04.20
- * @brief      task management implementation code of CooCox CoOS kernel.	
+ * @brief      task management implementation code of CooCox CoOS kernel.
+ *
+ * @author CooCox
+ * @author Jozef Maslik (maslo@binarylemon.com)
+ *
  *******************************************************************************
  * @copy
  *
@@ -707,7 +711,7 @@ StatusType CoSetPriority(OS_TID taskID,U8 priority)
  *             It is schedule function of OS kernel.
  *******************************************************************************
  */
-void Schedule(void)
+static inline void _schedule(BOOL yield)
 {
     U8  RunPrio,RdyPrio;
     P_OSTCB pRdyTcb,pCurTcb;
@@ -742,7 +746,7 @@ void Schedule(void)
     }
     
 #if CFG_ROBIN_EN >0                 /* Is time for robinning                  */                            
-    else if((RunPrio == RdyPrio) && (OSCheckTime == OSTickCnt))
+    else if((RunPrio == RdyPrio) && (yield || (OSCheckTime == OSTickCnt)))
     {
         TCBNext        = pRdyTcb;   /* Yes,set TCBNext and reorder READY list */
         InsertToTCBRdyList(pCurTcb);
@@ -770,6 +774,12 @@ void Schedule(void)
  	
     SwitchContext();                              /* Call task context switch */
 }
+
+void Schedule(void)
+{
+    _schedule(Co_FALSE);
+}
+
 
 
 /**
@@ -1258,3 +1268,20 @@ StatusType CoAwakeTask(OS_TID taskID)
     return E_OK;                        /* return OK                          */
 }
 #endif
+
+/**
+ *******************************************************************************
+ * @brief      Yeild function
+ * @param[in]  None
+ * @param[out] None
+ * @retval     None
+ *
+ * @par Description
+ * @details
+ *
+ *******************************************************************************
+ */
+void CoYield(void)
+{
+    _schedule(Co_TRUE);
+}
