@@ -22,6 +22,7 @@
 #ifndef _QUEUE_H
 #define _QUEUE_H
 
+#include <coocox.h>
 
 /**
  * @struct   Queue  queue.h	

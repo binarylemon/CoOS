@@ -201,8 +201,11 @@ extern void*       CoAcceptQueueMail(OS_EventID id,StatusType* perr);
 extern OS_EventID  CoCreateQueue(void **qStart, U16 size ,U8 sortType);
 extern void*       CoPendQueueMail(OS_EventID id,U32 timeout,StatusType* perr);
 
-extern OS_EventID  CoCreateQueueEx(void **qStart, U16 size, U8 sortType);
+extern StatusType  CoDelQueueEx(OS_EventID id,U8 opt);
 extern StatusType  CoPostQueueMailEx(OS_EventID id, void* pmail, U32 timeout);
+extern void*       CoAcceptQueueMailEx(OS_EventID id,StatusType* perr);
+extern OS_EventID  CoCreateQueueEx(void **qStart, U16 size, U8 sortType);
+extern void*       CoPendQueueMailEx(OS_EventID id, U32 timeout, StatusType* perr);
 
 
 /* Implement in file "flag.c"      */
