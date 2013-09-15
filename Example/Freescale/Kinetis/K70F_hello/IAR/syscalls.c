@@ -26,7 +26,7 @@ size_t __write(int hndl, const unsigned char *buf, size_t size) {
     }
 
     while (size--) {
-        uart_putch(UART2_BASE_PTR, *buf++);
+        uart_putc(UART2_BASE_PTR, *buf++);
         tx++;
     }
 

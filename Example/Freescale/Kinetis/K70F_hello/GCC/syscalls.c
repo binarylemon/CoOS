@@ -20,7 +20,7 @@ _ssize_t _read_r(struct _reent *reent, int fd, void *buf, size_t cnt) {
     char *p = (char*) buf;
 
     while (rd < cnt) {
-        *p = uart_getchar(UART2_BASE_PTR);
+        *p = uart_getc(UART2_BASE_PTR);
 
         if ('\r' == *p) {
             *p = 0;
@@ -42,7 +42,7 @@ _ssize_t _write_r(struct _reent *reent, int fd, const void *buf, size_t cnt) {
     const char *p = buf;
 
     for (i = 0; i < cnt; i++) {
-        uart_putch(UART2_BASE_PTR, *p++);
+        uart_putc(UART2_BASE_PTR, *p++);
     }
 
     return i;
