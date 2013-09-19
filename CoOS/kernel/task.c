@@ -746,14 +746,16 @@ static inline void _schedule(BOOL yield)
     }
     
 #if CFG_ROBIN_EN >0                 /* Is time for robinning                  */                            
-    else if((RunPrio == RdyPrio) && (yield || (OSCheckTime == OSTickCnt)))
+    else if ((RunPrio == RdyPrio) && (yield || (OSCheckTime == OSTickCnt)))
+#else /* simple yield */
+    else if ((RunPrio == RdyPrio) && yield)
+#endif
     {
         TCBNext        = pRdyTcb;   /* Yes,set TCBNext and reorder READY list */
         InsertToTCBRdyList(pCurTcb);
 		RemoveFromTCBRdyList(pRdyTcb);
         pRdyTcb->state = TASK_RUNNING;
     }
-#endif
     else
     {								    
         return;	
