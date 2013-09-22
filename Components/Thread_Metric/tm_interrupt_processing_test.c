@@ -37,6 +37,7 @@
 /**************************************************************************/
 
 #include "tm_api.h"
+#include "AppConfig.h"
 
 
 /* Define the counters used in the demo application...  */
@@ -80,6 +81,8 @@ void main()
 
 void  tm_interrupt_processing_initialize(void)
 {
+    NVIC_SetPriority(TM_TEST_IRQ, 0);
+    NVIC_EnableIRQ(TM_TEST_IRQ);
 
     /* Create thread that generates the interrupt at priority 10.  */
     tm_thread_create(0, 10, tm_interrupt_thread_0_entry);
@@ -119,7 +122,7 @@ int status;
            the interrupt handler is called from the appropriate software
            interrupt or trap. */
 
-        asm("trap");  /* This is PowerPC specific.  */
+        NVIC_SetPendingIRQ(TM_TEST_IRQ);
 
         /* We won't get back here until the interrupt processing is complete,
            including the setting of the semaphore from the interrupt 

@@ -68,13 +68,13 @@ queue and retrieving the same 16 byte message from the queue.
 After the send/receive sequence is complete, the thread will 
 increment its run counter.
 
-1.4. Synchronization Processing Test
+1.7. Synchronization Processing Test
 
 This test consists of a thread getting a semaphore and then 
 immediately releasing it. After the get/put cycle completes, 
 the thread will increment its run counter.
 
-1.5. RTOS Memory allocation
+1.8. RTOS Memory allocation
 
 This test consists of a thread allocating a 128-byte block and 
 releasing the same block. After the block is released, the thread 

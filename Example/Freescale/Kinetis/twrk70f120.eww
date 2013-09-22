@@ -10,6 +10,30 @@
   <project>
     <path>$WS_DIR$\K70F_lwIP\IAR\lwip_twrk70f120.ewp</path>
   </project>
+  <project>
+    <path>$WS_DIR$\K70F_bench\IAR\tm_bench1_twrk70f120.ewp</path>
+  </project>
+  <project>
+    <path>$WS_DIR$\K70F_bench\IAR\tm_bench2_twrk70f120.ewp</path>
+  </project>
+  <project>
+    <path>$WS_DIR$\K70F_bench\IAR\tm_bench3_twrk70f120.ewp</path>
+  </project>
+  <project>
+    <path>$WS_DIR$\K70F_bench\IAR\tm_bench4_twrk70f120.ewp</path>
+  </project>
+  <project>
+    <path>$WS_DIR$\K70F_bench\IAR\tm_bench5_twrk70f120.ewp</path>
+  </project>
+  <project>
+    <path>$WS_DIR$\K70F_bench\IAR\tm_bench6_twrk70f120.ewp</path>
+  </project>
+  <project>
+    <path>$WS_DIR$\K70F_bench\IAR\tm_bench7_twrk70f120.ewp</path>
+  </project>
+  <project>
+    <path>$WS_DIR$\K70F_bench\IAR\tm_bench8_twrk70f120.ewp</path>
+  </project>
   <batchBuild/>
 </workspace>
 
