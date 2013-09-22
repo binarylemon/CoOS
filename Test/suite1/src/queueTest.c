@@ -25,8 +25,8 @@
 #define TEST_QUEUE_BUF_SIZE ( 5 )
 
 /*---------------------------- Variable Define -------------------------------*/
-OS_EventID queue1ID;
-U32 queue1Buf[TEST_QUEUE_BUF_SIZE];
+static OS_EventID queue1ID;
+static U32 queue1Buf[TEST_QUEUE_BUF_SIZE];
 
 static char* queue1_getTest(void)
 {
@@ -123,7 +123,7 @@ static void queue1_execute(void)
 
 }
 
-const TestCase testQueue1 = {
+static const TestCase testQueue1 = {
 	queue1_getTest,
 	NULL,
 	NULL,
@@ -171,7 +171,7 @@ static void queue2_execute(void)
 
 }
 
-const TestCase testQueue2 = {
+static const TestCase testQueue2 = {
 	queue2_getTest,
 	NULL,
 	NULL,
@@ -209,7 +209,7 @@ static void queue3_execute(void)
 
 }
 
-const TestCase testQueue3 = {
+static const TestCase testQueue3 = {
 	queue3_getTest,
 	NULL,
 	NULL,
@@ -223,8 +223,7 @@ const TestCase* const patternQueue[] = {
 	&testQueue1,
 	&testQueue2,
 	&testQueue3,
-
-  NULL
+	NULL
 };
 #endif
 

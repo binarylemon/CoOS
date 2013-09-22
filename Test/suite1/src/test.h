@@ -4,6 +4,10 @@
  * @version     V1.00    Initial version
  * @date        2009.06.29
  * @brief       This header file is part of CooCox OS test.
+ *
+ * @author CooCox
+ * @author Jozef Maslik (maslo@binarylemon.com)
+ *
  *******************************************************************************
  * @copy
  *
@@ -22,16 +26,17 @@
 /*---------------------------- Define  ---------------------------------------*/
 
 /*<--------------------------- Test Moudle Config ----------------------------*/
-#define TASK_TEST_EN			(1)
-#define TIME_TEST_EN			(1) 
-#define TIMER_TEST_EN			(1)
-#define SEM_TEST_EN				(1)
-#define MBOX_TEST_EN			(1)
-#define QUEUE_TEST_EN			(1)
-#define FLAG_TEST_EN			(1)
-#define MUTEX_TEST_EN			(1)
-#define MM_TEST_EN				(1)
-#define KHEAP_TEST_EN			(1)
+#define TASK_TEST_EN            (1)
+#define TIME_TEST_EN            (1)
+#define TIMER_TEST_EN           (1)
+#define SEM_TEST_EN             (1)
+#define MBOX_TEST_EN            (1)
+#define QUEUE_TEST_EN           (1)
+#define QUEUEEX_TEST_EN         (1)
+#define FLAG_TEST_EN            (1)
+#define MUTEX_TEST_EN           (1)
+#define MM_TEST_EN              (1)
+#define KHEAP_TEST_EN           (1)
 
 
 #define MAINTEST_PRIMARY_PRIORITY (32)  
@@ -94,6 +99,7 @@ extern const TestCase* const patternTimer[];
 extern const TestCase* const patternSem[];
 extern const TestCase* const patternMbox[];
 extern const TestCase* const patternQueue[];
+extern const TestCase* const patternQueueEx[];
 extern const TestCase* const patternMutex[];
 extern const TestCase* const patternFlag[];
 extern const TestCase* const patternMm[];

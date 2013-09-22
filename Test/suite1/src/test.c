@@ -4,6 +4,10 @@
  * @version     V1.00    Initial version
  * @date        2009.06.26
  * @brief       This file provides test frame for CooCox test.
+ *
+ * @author CooCox
+ * @author Jozef Maslik (maslo@binarylemon.com)
+ *
  *******************************************************************************
  * @copy
  *
@@ -22,7 +26,7 @@
 
 /*---------------------------- Define  ---------------------------------------*/
 #define MAINTEST_STK_SIZE (200)
-#define PRINT_STK_SIZE    ( 70)
+#define PRINT_STK_SIZE    (200)
 
 
 /*
@@ -53,6 +57,10 @@ static const TestCase* const *patterns[] = {
 
 #if (CFG_EVENT_EN > 0 && CFG_QUEUE_EN > 0 && QUEUE_TEST_EN > 0)
 	patternQueue,
+#endif
+
+#if (CFG_EVENT_EN > 0 && CFG_QUEUE_EN > 0 && QUEUEEX_TEST_EN > 0)
+    patternQueueEx,
 #endif
 
 #if (CFG_FLAG_EN > 0 && FLAG_TEST_EN > 0)
